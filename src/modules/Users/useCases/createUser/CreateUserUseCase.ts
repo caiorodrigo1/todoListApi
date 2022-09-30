@@ -1,6 +1,7 @@
 import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../shared/errors/AppError";
 import { User } from "../../entities/User";
+import { IHashProvider } from "../../providers/HashProvider/IHashProvider";
 import {
   ICreateUser,
   IUsersRepository,
@@ -10,7 +11,9 @@ import {
 class CreateUserUseCase {
   constructor(
     @inject("UsersRepository")
-    private usersRepository: IUsersRepository
+    private usersRepository: IUsersRepository,
+    @inject("HashProvider")
+    private hashProvider: IHashProvider
   ) {}
 
   async execute({ name, email, password }: ICreateUser): Promise<User> {
@@ -20,10 +23,12 @@ class CreateUserUseCase {
       throw new AppError("Email already in use.");
     }
 
+    const hashedPassword = await this.hashProvider.generateHash(password);
+
     const user = await this.usersRepository.create({
       name,
       email,
-      password,
+      password: hashedPassword,
     });
 
     return user;

@@ -15,6 +15,16 @@ interface IUser {
   updated_at: Date;
 }
 
+interface ICreateSession {
+  email: string;
+  password: string;
+}
+
+interface IUserAuthenticated {
+  user: IUser;
+  token: string;
+}
+
 interface IUsersRepository {
   create({ name, email, password }: ICreateUser): Promise<User>;
   save({
@@ -28,4 +38,10 @@ interface IUsersRepository {
   findByEmail(email: string): Promise<User>;
 }
 
-export { IUsersRepository, ICreateUser, IUser };
+export {
+  IUsersRepository,
+  ICreateUser,
+  IUser,
+  ICreateSession,
+  IUserAuthenticated,
+};
