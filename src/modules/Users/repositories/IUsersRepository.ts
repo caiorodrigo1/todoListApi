@@ -16,7 +16,7 @@ interface IUser {
 }
 
 interface IUsersRepository {
-  create({ name, email, password }: ICreateUser): Promise<void>;
+  create({ name, email, password }: ICreateUser): Promise<User>;
   save({
     id,
     name,
@@ -24,7 +24,7 @@ interface IUsersRepository {
     password,
     created_at,
     updated_at,
-  }: IUser): Promise<IUser>;
+  }: IUser): Promise<User>;
   findByEmail(email: string): Promise<User>;
 }
 

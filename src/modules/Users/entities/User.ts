@@ -6,9 +6,10 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
+import { IUser } from "../repositories/IUsersRepository";
 
 @Entity("users")
-class User {
+class User implements IUser {
   @PrimaryColumn()
   id: string;
 
@@ -16,7 +17,7 @@ class User {
   name: string;
 
   @Column()
-  email: boolean;
+  email: string;
 
   @Column()
   password: string;
