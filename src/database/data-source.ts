@@ -7,7 +7,10 @@ const AppDataSource = new DataSource({
   port: 5432,
   username: "postgres",
   password: "changeme",
-  entities: ["src/modules/Tasks/entities/*{.ts,.js}"],
+  entities: [
+    "src/modules/Tasks/entities/*{.ts,.js}",
+    "src/modules/Users/entities/*{.ts,.js}",
+  ],
   migrations: ["src/database/migrations/*{.ts,.js}"],
 });
 

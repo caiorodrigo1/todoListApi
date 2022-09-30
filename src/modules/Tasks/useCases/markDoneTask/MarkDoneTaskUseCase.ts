@@ -1,5 +1,6 @@
 import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../shared/errors/AppError";
+import { Task } from "../../entities/Task";
 import { ITasksRepository } from "../../repositories/ITasksRepositories";
 
 interface IRequest {
@@ -7,21 +8,25 @@ interface IRequest {
 }
 
 @injectable()
-class DeleteTaskUseCase {
+class MarkDoneTaskUseCase {
   constructor(
     @inject("TasksRepository")
     private tasksRepository: ITasksRepository
   ) {}
 
-  async execute({ id }: IRequest): Promise<void> {
+  async execute({ id }: IRequest): Promise<Task> {
     const task = await this.tasksRepository.findById(id);
 
     if (!task) {
-      throw new AppError("Task not found.");
+      throw new AppError("Task does not exists.");
     }
 
-    await this.tasksRepository.remove(id);
+    task.isDone = true;
+
+    await this.tasksRepository.save(task);
+
+    return task;
   }
 }
 
-export { DeleteTaskUseCase };
+export { MarkDoneTaskUseCase };

@@ -2,7 +2,7 @@ import { Repository } from "typeorm";
 
 import { AppDataSource } from "../../../../database/data-source";
 import { Task } from "../../entities/Task";
-import { ICreateTaskDTO, ITasksRepository } from "../ITasksRepositories";
+import { ICreateTaskDTO, ITask, ITasksRepository } from "../ITasksRepositories";
 
 class TasksRepository implements ITasksRepository {
   private repository: Repository<Task>;
@@ -17,8 +17,15 @@ class TasksRepository implements ITasksRepository {
     await this.repository.save(task);
   }
 
+  async save(task: ITask): Promise<Task> {
+    await this.repository.save(task);
+
+    return task;
+  }
+
   async list(): Promise<Task[]> {
     const tasks = await this.repository.find();
+
     return tasks;
   }
 
@@ -29,7 +36,34 @@ class TasksRepository implements ITasksRepository {
   }
 
   async findById(id: string): Promise<Task> {
-    const task = await this.repository.findOne({ id });
+    const task = await this.repository.findOneBy({ id });
+
+    return task;
+  }
+
+  async remove(id: string): Promise<void> {
+    const task = await this.repository.findOneBy({ id });
+
+    await this.repository.delete(task);
+  }
+
+  async edit({ id, content }: ITask): Promise<Task> {
+    const task = await this.repository.findOneBy({ id });
+
+    task.content = content;
+
+    await this.repository.save(task);
+
+    return task;
+  }
+
+  async markDone(id: string): Promise<Task> {
+    const task = await this.repository.findOneBy({ id });
+
+    task.isDone = true;
+
+    await this.repository.save(task);
+
     return task;
   }
 }
