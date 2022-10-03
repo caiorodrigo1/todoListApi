@@ -6,8 +6,11 @@ Este projeto é a resolução de um desafio backend na Top Down.
 
 ● Construção de uma API para uma pequena aplicação to-do list com as seguintes funcionalidades:
   ● Adicionar uma tarefa
+  
   ● Listar as tarefas cadastradas
+  
   ● Excluir uma tarefa
+  
 ● Funcionalidades opcionais que foram implementadas:
   ● Editar uma tarefa
   ● Marcar uma tarefa como concluída
