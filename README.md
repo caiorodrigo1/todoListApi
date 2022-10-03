@@ -5,6 +5,7 @@ Este projeto é a resolução de um desafio backend na Top Down.
 ### Requisitos
 
 ● Construção de uma API para uma pequena aplicação to-do list com as seguintes funcionalidades:
+
   ● Adicionar uma tarefa
   
   ● Listar as tarefas cadastradas
@@ -12,8 +13,11 @@ Este projeto é a resolução de um desafio backend na Top Down.
   ● Excluir uma tarefa
   
 ● Funcionalidades opcionais que foram implementadas:
+
   ● Editar uma tarefa
+  
   ● Marcar uma tarefa como concluída
+  
   ● Login de acesso a aplicação
   
 # Para rodar o projeto
@@ -50,11 +54,17 @@ Após a criação do usuário deve ser feito a autenticação, e utilizar o toke
 Neste projeto são utilizadas a rotas abaixo:
 
 POST - http://localhost:3990/users
+
 POST - http://localhost:3990/sessions
+
 POST - http://localhost:3990/tasks
+
 GET - http://localhost:3990/tasks
+
 DELETE - http://localhost:3990/tasks/:id
+
 PATCH - http://localhost:3990/tasks/:id
+
 PATCH - http://localhost:3990/tasks/done/:id
 
 Indico utilizar o postman ou insomnia para o envio das requisições.
