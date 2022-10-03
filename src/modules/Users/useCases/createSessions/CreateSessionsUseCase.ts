@@ -18,7 +18,7 @@ class CreateSessionsUseCase {
     private hashProvider: IHashProvider
   ) {}
 
-  public async execute({
+  async execute({
     email,
     password,
   }: ICreateSession): Promise<IUserAuthenticated> {

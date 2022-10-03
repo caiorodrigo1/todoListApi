@@ -5,6 +5,7 @@ import { DeleteTaskController } from "../modules/Tasks/useCases/deleteTask/Delet
 import { EditTaskController } from "../modules/Tasks/useCases/editTask/EditTaskController";
 import { ListTasksController } from "../modules/Tasks/useCases/listTasks/ListTasksController";
 import { MarkDoneTaskController } from "../modules/Tasks/useCases/markDoneTask/MarkDoneTaskController";
+import isAuthenticated from "../shared/middlewares/isAuthenticated";
 
 const tasksRoutes = Router();
 
@@ -14,14 +15,14 @@ const editTasksController = new EditTaskController();
 const markDoneTasksController = new MarkDoneTaskController();
 const deleteTasksController = new DeleteTaskController();
 
-tasksRoutes.post("/", createTaskController.handle);
+tasksRoutes.post("/", isAuthenticated, createTaskController.handle);
 
-tasksRoutes.get("/", listTasksController.handle);
+tasksRoutes.get("/", isAuthenticated, listTasksController.handle);
 
-tasksRoutes.patch("/:id", editTasksController.handle);
+tasksRoutes.patch("/:id", isAuthenticated, editTasksController.handle);
 
-tasksRoutes.patch("/done/:id", markDoneTasksController.handle);
+tasksRoutes.patch("/done/:id", isAuthenticated, markDoneTasksController.handle);
 
-tasksRoutes.delete("/:id", deleteTasksController.handle);
+tasksRoutes.delete("/:id", isAuthenticated, deleteTasksController.handle);
 
 export { tasksRoutes };
